@@ -21,13 +21,11 @@ def posts(request):
 def post_detail(request, slug):
     if request.method=="POST":
         form=CommentForm(request.POST)
-        print("hello")
-        print(form)
+        post=Post.objects.get(slug=slug)
         if form.is_valid():
-            post=Post.objects.get(slug=slug)
-            c=Comment(comment=request.POST.get("comment"),post=post)
-            print(post,c,"heuuu")
-            c.save()
+            f=form.save(commit=False)
+            f.post=post
+            f.save()
         return HttpResponseRedirect(f"/posts/{slug}")
     else:
         form=CommentForm()

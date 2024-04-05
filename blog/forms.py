@@ -4,4 +4,5 @@ from .models import Comment
 class CommentForm(forms.ModelForm):
     class Meta:
         model=Comment
-        fields=['comment']
+        exclude=['date','post']
+        labels={"username":"Your Name","email":"email address"}

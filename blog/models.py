@@ -30,8 +30,10 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag)
 
 class Comment(models.Model):
+    username=models.CharField(max_length=100,default="")
+    email=models.EmailField(default="")
     comment = models.CharField(max_length=300)
-    date=models.DateField(auto_now_add=True)
+    date=models.DateField(auto_now=True)
     post=models.ForeignKey(Post,on_delete=models.CASCADE)
 
     def __str__(self):
