@@ -32,7 +32,7 @@ class Post(models.Model):
 class Comment(models.Model):
     username=models.CharField(max_length=100,default="")
     email=models.EmailField(default="")
-    comment = models.CharField(max_length=300)
+    comment = models.TextField(max_length=300)
     date=models.DateField(auto_now=True)
     post=models.ForeignKey(Post,on_delete=models.CASCADE)
 
