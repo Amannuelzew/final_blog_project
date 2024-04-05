@@ -3,7 +3,6 @@ from django.core.validators import MinLengthValidator
 
 # Create your models here.
 
-
 class Tag(models.Model):
     caption = models.CharField(max_length=30)
 
@@ -29,3 +28,11 @@ class Post(models.Model):
     content = models.TextField(validators=[MinLengthValidator(10)])
     author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True)
     tags = models.ManyToManyField(Tag)
+
+class Comment(models.Model):
+    comment = models.CharField(max_length=300)
+    date=models.DateField(auto_now_add=True)
+    post=models.ForeignKey(Post,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.comment}"

@@ -24,4 +24,20 @@
  <main>
     <p>{{post.content|linebreaks}} </p>
  </main>
+  <main>
+    <ul>
+        {% for comment in comments %}
+            <li><p>{{comment}} ||{{comment.date|timesince}} </p></li>
+         {% endfor %}
+    </ul>
+ </main>
+
+  <section>
+    <form action="{{"/posts/"|add:post.slug}}" method="post">
+        {% csrf_token %}
+        <input type="text" name="comment" placeholder="Comments.....">
+        <button>Submit</button>
+    </form>
+ </section>
+
 {% endblock content %}
