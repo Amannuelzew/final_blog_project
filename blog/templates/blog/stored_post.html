@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+    {% block title %}
+     Favorite posts
+    {% endblock title %}
+
+   
+{% block content %}
+   <section>
+    <ul>
+        {% for favorite in favorites %}
+         <li><a href="{% url "post_detail" favorite.slug %}" >{{favorite.title}}</a></li>
+        {% endfor %}
+    </ul>
+    </section>
+{% endblock content %}

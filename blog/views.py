@@ -63,3 +63,17 @@ class PostDetailView(View):
             print(p,c,"heuuu")
             c.save()
             return HttpResponseRedirect(reverse("posts"))
+
+fav_list=[]
+class FavoriteView(View):
+  
+    def post(self,request):
+        id=request.POST.get("post_id")
+        if id not in fav_list:
+            fav_list.append(id)
+        return HttpResponseRedirect(reverse("posts"))
+class StoredView(View):
+    def get(self,request):
+         posts=Post.objects.filter(id__in=fav_list)
+         context={"favorites":posts}
+         return render(request, "blog/stored_post.html", context)

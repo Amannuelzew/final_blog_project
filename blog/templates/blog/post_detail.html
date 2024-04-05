@@ -4,8 +4,8 @@
      {{post.title}}
     {% endblock title %}
 
-     {% block css %}
-    <link rel="stylesheet" href="{% static "blog/post_detail.css" %}"/>
+    {% block css %}
+      <link rel="stylesheet" href="{% static "blog/post_detail.css" %}"/>
       <link rel="stylesheet" href="{% static "blog/post.css" %}"/>
     {% endblock css %}
 {% block content %}
@@ -14,6 +14,13 @@
     {% for tag in tags %}
         <span>#{{tag|title}},</span>
     {% endfor %}
+    <div id="read-later">
+    <form action="{% url "favorite_post" %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" value="{{ post.id }}" name="post_id" />
+        <button>Read Later</button>
+    </form>
+    </div>
     <article>
         <img src="{{post.image.url}}" alt="{{post.title}}">
         <address>By author <a href="mailto:{{post.author.email}}"> {{post.author|title}} </a></address>
@@ -24,6 +31,7 @@
  <main>
     <p>{{post.content|linebreaks}} </p>
  </main>
+ {% if comments|length > 0 %}
   <section id="comments">
     <ul>
         {% for comment in comments %}
@@ -31,7 +39,8 @@
             <p>{{comment}} ||{{comment.date|timesince}} </p>
          {% endfor %}
     </ul>
- </section>
+  </section>
+  {% endif %}
 
   <section id="comment-form">
     <form action="{{"/posts/"|add:post.slug}}" method="post">
