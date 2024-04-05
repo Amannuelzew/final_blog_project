@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% load static %}
+
+    {% block title %}
+    Blog
+    {% endblock title %}
+    {% block css %}
+    <link rel="stylesheet" href="{% static "blog/index.css" %}"/>
+      <link rel="stylesheet" href="{% static "blog/post.css" %}"/>
+    {% endblock css %}
+
+{% block content %}
+ 
+   <section id="welcome">
+  <header>
+    <img alt="creator Blogs" />
+    <h2>Blogs</h2>
+  </header>
+  <p>Welcome to Blogs</p>
+</section>
+<section id="latest-posts">
+  <h2>Latest Posts</h2>
+   <ul>
+           {% for article  in articles %}
+            {% include "blog/includes/post.html" %}
+           {% endfor %}
+   </ul>
+</section>
+<section id="about">
+  <h2>What I DO</h2>
+  <p>im corrupti provident, itaque voluptatem minima aut exercitationem sit nisi tempore laudantium ratione non dolorem. Quaerat deleniti possimus exercitationem amet, ipsum magnam nulla temporibus quos laudantium, sit magnam temporibus perspiciatis odio ea officia quisquam pariatur magni doloribus rerum, nulla cupiditate dolore ratione dignissimos cum adipisci maxime, expedita dolorum quasi sunt sapiente.</p>
+</section>
+
+{% endblock content %}
